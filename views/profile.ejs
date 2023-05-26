@@ -1,0 +1,128 @@
+<%- include('./header.ejs') %>
+
+    <div class="container-fluid"><br>
+        <div class="container ">
+            <div class="row">
+                <% if(error.length> 0) { %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                        <% if(message.length> 0) { %>
+                            <div class="alert alert-success">
+                                <%= message %>
+                            </div>
+                            <% } %>
+
+                                <div class="col-md-12 mt-5">
+                                    <div class="card mt-5 mb-5" style="border-radius: 1rem; background: #12587a;">
+                                        <div class="row">
+                                            <h1 class="text-center text-white mt-3">Profile Dashboard</h1>
+                                            <div class="col-md-4 mt-2">
+                                                <img src="<%= i %>" class="rounded-circle w-100 mb-5 px-5" alt="">
+
+                                            </div>
+                                            <div class="col-md-8 text-center mt-5">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item"><strong>Name:</strong>
+                                                        <%= n %>
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Email:</strong>
+                                                        <%= e %>
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Phone:</strong>
+                                                        <%= m %>
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Course:</strong> MCA</li>
+                                                    <li class="list-group-item"><strong>About:</strong> Lorem ipsum
+                                                        dolor sit amet,
+                                                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                                        labore et
+                                                        dolore magna aliqua.</li>
+                                                </ul>
+
+                                                <button class="btn btn-info mt-5" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#profileUpdateModal">Update Profile</button>
+                                                <button class="btn btn-info mt-5" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#passwordChangeModal">Change
+                                                    Password</button><br><br>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+            </div><!--row end-->
+        </div><!--container end-->
+    </div> <!--container-fluid end-->
+
+    <!--model-->
+    <!-- Profile update modal -->
+    <div class="modal fade" id="profileUpdateModal" tabindex="-1" aria-labelledby="profileUpdateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileUpdateModalLabel">Update Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/profile_update" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<%= n %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= e %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                            <img src="<%= i %>" class="rounded-circle py-3" alt="" width=" 50">
+                            <!-- <small class="form-text text-muted">Upload a new profile picture, or leave blank to keep the current one.</small> -->
+                        </div>
+                        <button type="submit" class="btn btn-info ">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Password change modal -->
+    <div class="modal fade" id="passwordChangeModal" tabindex="-1" aria-labelledby="passwordChangeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordChangeModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/change_password" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Old Password</label>
+                            <input type="password" class="form-control" name="oldpassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">New Password</label>
+                            <input type="password" class="form-control" name="newpassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Confirm Password</label>
+                            <input type="password" class="form-control" name="cpassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-info mt-2">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <%- include('./footer.ejs') %>
